@@ -1,0 +1,28 @@
+# 注释以 # 开头
+# 示例代码：计算 1 + 1
+
+const _2pi 6
+const step 1
+
+# 读入循环次数存入register4
+in_to_reg4
+
+label loop
+# 加一次2π
+_2pi
+reg0_to_reg1
+reg5_to_reg2
+add
+reg3_to_reg5
+
+# 判断循环条件
+reg4_to_reg1
+1
+reg0_to_reg2
+sub
+reg3_to_reg4
+
+if_g_0 
+
+# 循环结束，输出
+reg5_to_out

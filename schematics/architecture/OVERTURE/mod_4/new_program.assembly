@@ -1,0 +1,7 @@
+const mask 0b00000011
+cp|in|r0
+cp|r0_to|r1
+mask
+cp|r0_to|r2
+AND
+cp|r3_to|out

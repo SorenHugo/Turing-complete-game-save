@@ -1,0 +1,28 @@
+3
+cp|r0_to|r4
+label main
+1
+cp|out
+0
+cp|out
+cp|in|r3
+wall not_zero
+main always
+
+label wall
+2
+cp|out
+cp|in|r3
+pd not_zero
+main always
+
+label pd
+cp|r4_to|r2
+cp|r3_to|r1
+SUB
+open is_zero
+wall always
+
+label open
+4
+cp|r0_to|out

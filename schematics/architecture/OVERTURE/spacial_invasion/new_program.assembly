@@ -1,0 +1,24 @@
+# 清除前方方块并前进一步
+5
+cp|r0_to|out
+cp|r0_to|r4
+1
+cp|r0_to|out
+# wait指令
+3
+cp|r0_to|r5
+
+label loop
+cp|in|r3
+wait is_zero
+shoot not_zero
+
+# 射击
+label shoot
+cp|r4_to|out
+loop always
+
+# 等待
+label wait
+cp|r5_to|out
+loop always

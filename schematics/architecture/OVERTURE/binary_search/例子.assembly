@@ -1,0 +1,7 @@
+1
+cp|r0_to|r1
+label loop
+cp|r3_to|r2
+ADD
+cp|r3_to|out
+loop always
