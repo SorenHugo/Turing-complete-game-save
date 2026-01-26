@@ -1,1 +1,6 @@
-label main
+IMM12 32 0 3
+
+WRITE IN r0 RAM
+label loop
+IMM1 1 r0 r0
+IF_LESS_EQUA r0 r3 loop
