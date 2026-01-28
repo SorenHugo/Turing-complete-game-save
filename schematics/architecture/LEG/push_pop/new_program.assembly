@@ -1,0 +1,17 @@
+# PUSH: PUSH src *  *
+# POP : POP   *  * dst
+
+label main
+IMM1 0 IO REG0
+IMM12 0 0 REG1
+IF_EQ REG0 REG1 pop
+
+
+label push
+PUSH REG0 NULL NULL
+goto NULL NULL main
+
+
+label pop
+POP NULL NULL IO
+goto NULL NULL main

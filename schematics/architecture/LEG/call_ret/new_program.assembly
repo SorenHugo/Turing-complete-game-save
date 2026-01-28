@@ -1,0 +1,13 @@
+label main
+CALL add1
+
+
+
+
+label add1
+CALL add2
+RET NULL NULL NULL
+
+label add2
+
+RET NULL NULL NULL
