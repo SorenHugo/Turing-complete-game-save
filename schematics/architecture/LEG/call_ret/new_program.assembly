@@ -1,13 +1,52 @@
+# int fib(int n){
+# 	if(n == 1 || n == 2){
+# 		return 1;
+# 	{
+# 	return fib(n - 1) + fib(n - 2)
+# }
+
 label main
-CALL add1
-
-
-
-
-label add1
-CALL add2
+	IMM12 0 3 REG0
+	CALL NULL NULL f_fib 
+	IMM1 0 REG5 IO
+	
+	label loop
+	goto NULL NULL loop
+	
+label f_fib
+	# REG0: input index n
+	# REG5: return
+	IMM1 0 REG0 REG1
+	IMM2|IF_LE_EQ REG1 2 fib_1
+	
+	# call f_fib(n-1)
+	PUSH REG1 0 0
+	PUSH REG2 0 0
+	PUSH REG3 0 0
+	IMM2|SUB REG1 1 REG1 #n-1
+	IMM1 0 REG1 REG0
+	CALL NULL NULL f_fib 
+	POP 0 0 REG3
+	POP 0 0 REG2
+	POP 0 0 REG1
+	IMM1 0 REG5 REG1
+	
+	# call fib(n-2)
+	PUSH REG1 0 0
+	PUSH REG2 0 0
+	PUSH REG3 0 0
+	IMM2|SUB REG1 2 REG1
+	IMM1 0 REG1 REG0
+	CALL NULL NULL f_fib
+	POP 0 0 REG3
+	POP 0 0 REG2
+	POP 0 0 REG1
+	IMM1 0 REG0 REG3
+	ADD REG2 REG3 REG5
+	
+	
 RET NULL NULL NULL
 
-label add2
-
+label fib_1
+	IMM12 0 1 REG5
 RET NULL NULL NULL
