@@ -1,3 +1,5 @@
+# n  :0、1、2、3、4、5、6、 7、 8、 9、10、11
+# fib:0、1、1、2、3、5、8、13、21、34、55、89
 # int fib(int n){
 # 	if(n == 1 || n == 2){
 # 		return 1;
@@ -6,7 +8,7 @@
 # }
 
 label main
-	IMM12 0 3 REG0
+	IMM12 0 5 REG0
 	CALL NULL NULL f_fib 
 	IMM1 0 REG5 IO
 	
@@ -29,7 +31,7 @@ label f_fib
 	POP 0 0 REG3
 	POP 0 0 REG2
 	POP 0 0 REG1
-	IMM1 0 REG5 REG1
+	IMM1 0 REG5 REG2
 	
 	# call fib(n-2)
 	PUSH REG1 0 0
@@ -41,12 +43,10 @@ label f_fib
 	POP 0 0 REG3
 	POP 0 0 REG2
 	POP 0 0 REG1
-	IMM1 0 REG0 REG3
+	IMM1 0 REG5 REG3
 	ADD REG2 REG3 REG5
-	
-	
 RET NULL NULL NULL
 
-label fib_1
+	label fib_1
 	IMM12 0 1 REG5
 RET NULL NULL NULL
