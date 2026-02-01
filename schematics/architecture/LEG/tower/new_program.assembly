@@ -1,2 +1,62 @@
+# REG0:disk_nr
+# REG1:source
+# REG2:dest
+# REG3:spare
 
+# 读取输入
+IMM1 0 IO REG0
+IMM1 0 IO REG1
+IMM1 0 IO REG2
+IMM1 0 IO REG3
+# 调用move函数
+CALL 0 0 move
 
+label move
+	#if disk_nr is 0:
+	IMM1|IF_EQ 0 REG0 move_0
+	#disk_nr - 1
+	IMM2|SUB REG0 1 REG0
+	
+	#move(disk_nr-1,source,spare,dest)
+	PUSH REG0 0 0
+	PUSH REG1 0 0 
+	PUSH REG2 0 0
+	PUSH REG3 0 0 
+	IMM1 0 REG2 REG4
+	IMM1 0 REG3 REG2
+	IMM1 0 REG4 REG3
+	CALL 0 0 move
+	POP 0 0 REG3
+	POP 0 0 REG2
+	POP 0 0 REG1
+	POP 0 0 REG0
+	
+	#move disk from source to dest
+	IMM1 0 REG1 IO
+	IMM12 0 5 IO
+	IMM1 0 REG2 IO
+	IMM12 0 5 IO
+	
+	#move(disk_nr-1,spare,dest,source)
+	PUSH REG0 0 0
+	PUSH REG1 0 0 
+	PUSH REG2 0 0
+	PUSH REG3 0 0 
+	IMM1 0 REG1 REG4
+	IMM1 0 REG3 REG1
+	IMM1 0 REG4 REG3
+	CALL 0 0 move
+	POP 0 0 REG3
+	POP 0 0 REG2
+	POP 0 0 REG1
+	POP 0 0 REG0
+	
+	RET 0 0 0
+
+# move disk from source to dest
+label move_0
+	IMM1 0 REG1 IO
+	IMM12 0 5 IO
+	IMM1 0 REG2 IO
+	IMM12 0 5 IO
+	RET 0 0 0

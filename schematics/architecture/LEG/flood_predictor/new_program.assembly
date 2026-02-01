@@ -1,0 +1,74 @@
+const i REG0
+const j REG1
+
+label read
+	WRITE IO i NULL
+	IMM1 1 i i
+	IMM1|IF_N_EQ 16 i read
+
+#计算每一列左侧最大值
+#for(i=1;i<15;i++){
+#	max = ram[i]
+#	for(j=0;j<i;j++){
+#		if(ram[j]>ram[i])
+#			max = ram[j]
+#	}
+#}
+IMM12 0 1 i
+label left
+	READ NULL i REG2
+	IMM12 0 0 j
+	label left_1
+		READ NULL j REG3
+		CALL NULL NULL get_max
+		IMM1 1 j j
+		IF_LE j i left_1
+	IMM1 16 i REG3
+	WRITE REG2 REG3 NULL
+	IMM1 1 i i 
+	IF_LE|IMM2 i 15 left
+
+#计算每一列右侧最大值
+IMM12 0 1 i
+label right
+	READ NULL i REG2
+	IMM1 0 i j
+	label right_1
+		READ NULL j REG3
+		CALL NULL NULL get_max
+		IMM1 1 j j
+		IF_LE|IMM2 j 16 right_1
+	IMM1 32 i REG3
+	WRITE REG2 REG3 NULL
+	IMM1 1 i i 
+	IF_LE|IMM2 i 15 right
+	
+#计算水量并累加
+IMM12 0 1 i
+label count
+	IMM1 16 i j
+	READ NULL j REG2
+	IMM1 32 i j
+	READ NULL j REG3
+	CALL NULL NULL get_min
+	READ NULL i REG3
+	SUB REG2 REG3 REG4
+	ADD REG4 REG5 REG5
+	IMM1 1 i i
+	IF_LE|IMM2 i 15 count
+#输出总水量
+IMM1 0 REG5 IO
+
+label get_max
+	IF_GR REG2 REG3 ret_max
+	IMM1 0 REG3 REG2
+	RET NULL NULL NULL
+	label ret_max
+	RET NULL NULL NULL
+	
+label get_min
+	IF_LE REG2 REG3 ret_min
+	IMM1 0 REG3 REG2
+	RET NULL NULL NULL
+	label ret_min
+	RET NULL NULL NULL
