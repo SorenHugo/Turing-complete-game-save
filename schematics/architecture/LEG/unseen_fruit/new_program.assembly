@@ -1,0 +1,29 @@
+# MOVE TO BELT
+IMM12 0 2 IO
+IMM12 0 1 IO
+IMM12 0 2 IO
+IMM12 0 1 IO
+IMM12 0 1 IO
+IMM12 0 1 IO
+IMM12 0 2 IO
+IMM12 0 1 IO
+IMM12 0 0 IO
+IMM12 0 1 IO
+IMM12 0 1 IO
+
+label main
+    IMM1 0 IO REG0
+    IMM2|IF_EQ REG0 92 skip
+    READ NULL REG0 REG1
+    IMM2|IF_EQ REG1 1 push
+    IMM1|WRITE 1 REG0 NULL
+    IMM12 0 3 IO
+goto 0 0 main 
+
+label skip
+    IMM12 0 3 IO
+goto 0 0 main 
+
+label push
+    IMM12 0 2 IO
+    IMM12 0 4 IO

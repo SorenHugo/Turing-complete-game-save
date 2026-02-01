@@ -1,0 +1,19 @@
+IMM1 0 IO REG0
+
+label seed
+    IMM2|SHR REG0 1 REG1
+    XOR REG0 REG1 REG0
+    IMM2|SHL REG0 1 REG1
+    XOR REG0 REG1 REG0
+    IMM2|SHR REG0 2 REG1
+    XOR REG0 REG1 REG0
+    IMM1 0 REG0 REG1
+
+label mod
+    IMM2|IF_LE REG1 4 out
+    IMM2|SUB REG1 4 REG1
+    goto 0 0 mod
+
+label out
+    IMM1 0 REG1 IO
+    goto 0 0 seed

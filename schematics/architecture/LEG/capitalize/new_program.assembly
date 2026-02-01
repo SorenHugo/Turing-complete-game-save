@@ -1,0 +1,27 @@
+# 第一个必定大写
+IMM1 0 IO REG0
+IMM2|SUB REG0 32 REG0
+IMM1 0 REG0 IO
+
+# 判断下一个是不是空格，
+# 空格则置标志位REG1为1
+label main
+	IMM1 0 IO REG0
+	IMM1|IF_EQ 1 REG1 upper 
+	CALL 0 0 setbit
+	IMM1 0 REG0 IO
+	goto 0 0 main
+
+label setbit
+	IMM2|IF_N_EQ REG0 32 ret
+	IMM12 0 1 REG1
+	RET 0 0 0
+	label ret
+	RET 0 0 0 
+
+label upper
+	IMM2|SUB REG0 32 REG0
+	IMM1 0 REG0 IO
+	IMM12 0 0 REG1
+	goto 0 0 main
+	
