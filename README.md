@@ -8,8 +8,8 @@
 
 ##
 ### OVERTURE architecture
-![OVERTURE architecture](pic\OVERTURE.jpg)
+![OVERTURE architecture](pic/OVERTURE.jpg)
 ### LEG architecture
-![LEG architecture](pic\LEG.jpg)
+![LEG architecture](pic/LEG.jpg)
 ### LEG instruction set
-![Instruction](pic\Instruction_set.png)
+![Instruction](pic/Instruction_set.png)
